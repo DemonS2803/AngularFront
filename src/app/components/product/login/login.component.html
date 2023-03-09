@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<div class="container">
+
+  <div class="columns is-centered">
+    <div class="column is-11-tablet is-10-desktop is-10-widescreen is-10-fullhd">
+
+      <section class="section">
+        <div class="container has-text-centered">
+
+          <img src="../../../../assets/img/logo.png" alt="">
+
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <form method="post">
+    <div class="column is-10-tablet is-7-desktop is-6-widescreen is-5-fullhd">
+
+      <div class="field">
+        <p class="control has-icons-left has-icons-right">
+          <input class="input" type="text" id="login" name="login" [(ngModel)]="login" placeholder="Login" >
+          <span class="icon is-small is-left">
+              <i class="fas fa-envelope"></i>
+            </span>
+
+        </p>
+      </div>
+      <div class="field">
+        <p class="control has-icons-left">
+          <input class="input" type="password" id="password" name="password" [(ngModel)]="password" placeholder="Password">
+          <span class="icon is-small is-left">
+              <i class="fas fa-lock"></i>
+            </span>
+        </p>
+      </div>
+      <div class="field">
+        <p class="control has-text-right">
+          <button class="button is-success" (click)="sendAuthRequest()">Login</button>
+        </p>
+      </div>
+
+
+    </div>
+  </form>
+
+  <form method="post" *ngIf="choose_role">
+    <div class="field">
+      <select  name="category" [(ngModel)]="role">
+        <option value="" *ngFor="let chosenRole of rolesToChoose"
+          [value]="chosenRole"> {{ chosenRole }} </option>
+      </select>
+    </div>
+    <button class="button is-success" (click)="sendChooseRoleRequest()" >Chose Role</button>
+  </form>
+
+</div>
+
+</body>
+</html>
+
+
+
+<!--<form  method="post">-->
+<!--  <table border="1">-->
+<!--    <tr>-->
+<!--      <td>Login</td>-->
+<!--      <td><input type="text" id="login" name="login" [(ngModel)]="login"></td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <td>Password</td>-->
+<!--      <td><input type="text" id="password" name="password" [(ngModel)]="password"></td>-->
+<!--    </tr>-->
+<!--  </table>-->
+<!--  <button type="submit" (click)="sendAuthRequest()">Authenticate</button>-->
+<!--</form>-->
