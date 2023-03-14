@@ -7,10 +7,10 @@ import { AppComponent } from './app.component';
  import {HttpClientModule} from "@angular/common/http";
  import {HomeComponent} from "./components/product/home/home.component";
 import {FormsModule} from "@angular/forms";
-import {CookieService} from "ngx-cookie-service";
 import { AdminComponent } from './components/product/admin/admin.component';
 import { StudentComponent } from './components/product/student/student.component';
 import { TeacherComponent } from './components/product/teacher/teacher.component';
+import { ErrorComponent } from './components/product/error/error.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,8 @@ import { TeacherComponent } from './components/product/teacher/teacher.component
     HomeComponent,
     AdminComponent,
     StudentComponent,
-    TeacherComponent
+    TeacherComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +28,7 @@ import { TeacherComponent } from './components/product/teacher/teacher.component
     HttpClientModule,
     FormsModule
   ],
-  providers: [CookieService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

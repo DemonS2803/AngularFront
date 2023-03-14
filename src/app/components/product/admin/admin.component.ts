@@ -13,11 +13,12 @@ export class AdminComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.http.get<any>(environment.backendURL + "/api/student/home", {
+    this.http.get<any>(environment.backendURL + "/api/admin/page", {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Credentials': 'true'
+        'Access-Control-Allow-Credentials': 'true',
+        'Authorization': localStorage.getItem("token") || ""
       }
     }).subscribe({
       next: ((response: any) => {

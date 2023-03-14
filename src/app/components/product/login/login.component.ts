@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, Inject, inject, Injectable, OnInit} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
 import {AuthUserDto} from "../../models/auth-user-dto";
@@ -11,10 +11,13 @@ import {Router} from "@angular/router";
   templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
+  // private cookieValue: string | undefined;
+
 
   constructor(private http: HttpClient,
               private router: Router) {
   }
+
 
   login: string = "";
   password: string = "";
@@ -24,6 +27,7 @@ export class LoginComponent implements OnInit {
   choose_role: boolean = false;
 
   ngOnInit(): void {
+
   }
 
   sendAuthRequest() {
@@ -41,11 +45,13 @@ export class LoginComponent implements OnInit {
           console.log(response)
           if (!response.needToChooseRole) {
             this.token = response.user.token;
+            localStorage.setItem("token", response.user.token)
             console.log(this.token);
           } else {
             console.log(response);
             this.choose_role = true;
             this.token = response.user.token;
+            localStorage.setItem("token", response.user.token)
             this.rolesToChoose = response.roles;
             console.log(this.rolesToChoose);
             console.log(response.token)
@@ -62,13 +68,13 @@ export class LoginComponent implements OnInit {
   sendChooseRoleRequest() {
     let chosenRole = new ChosenRoleDto(this.role);
     console.log(chosenRole);
-    console.log(this.token)
+    console.log(localStorage.getItem("token") || "")
     this.http.post<any>(environment.backendURL + "/api/auth/choose_role", JSON.stringify(chosenRole), {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Credentials': 'true',
-        'Authorization': this.token
+        'Authorization': localStorage.getItem("token") || ""
       }
     }).subscribe(
       {
@@ -77,6 +83,7 @@ export class LoginComponent implements OnInit {
           console.log(response.token);
           console.log("success");
           this.token = response.token;
+          localStorage.setItem("token", response.token)
           this.router.navigate(["home"]);
         }),
         error: ((error: any) => {
