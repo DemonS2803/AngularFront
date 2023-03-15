@@ -46,6 +46,7 @@ export class LoginComponent implements OnInit {
           if (!response.needToChooseRole) {
             this.token = response.user.token;
             localStorage.setItem("token", response.user.token)
+
             console.log(this.token);
           } else {
             console.log(response);
