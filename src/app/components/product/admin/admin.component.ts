@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
+import {FilterRequestDto} from "../../models/filter-request-dto";
+import * as path from "path";
 
 @Component({
   selector: 'app-admin',
@@ -8,6 +10,17 @@ import {environment} from "../../../../environments/environment";
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
+
+  reg_num: string = "";
+  position: string = "";
+  name: string = "";
+  surname: string = "";
+  patronymic: string = "";
+  birthday: string = "";
+  pol: string = "";
+  isRightRole: boolean = false;
+  filteredPersons = [];
+
 
   constructor(private http: HttpClient) {
   }
@@ -23,11 +36,44 @@ export class AdminComponent implements OnInit {
     }).subscribe({
       next: ((response: any) => {
         console.log(response);
+        this.isRightRole = true;
       }),
       error: ((error: any) => {
         console.log(error);
       })
     })
+  }
+
+  postFilterMethod(): void {
+    let filterDto = new FilterRequestDto( this.reg_num,
+                                          this.position,
+                                          this.name,
+                                          this.surname,
+                                          this.patronymic,
+                                          this.birthday,
+                                          this.pol,
+                                        )
+    console.log(filterDto);
+    this.http.post<any>(environment.backendURL + "/api/admin/filter", JSON.stringify(filterDto), {
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': 'true',
+        'Authorization': localStorage.getItem("token") || ""
+      }
+    }).subscribe(
+      {
+        next: ((response: any) => {
+          console.log(response)
+          this.filteredPersons = response
+
+        }),
+        error: (error => {
+          console.log(filterDto);
+          console.log(error)
+        })
+      }
+    )
   }
 
 }

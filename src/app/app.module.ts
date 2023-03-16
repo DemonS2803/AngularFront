@@ -20,7 +20,6 @@ import { TeacherComponent } from './components/product/teacher/teacher.component
     AdminComponent,
     StudentComponent,
     TeacherComponent,
-    ErrorComponent
   ],
   imports: [
     BrowserModule,
