@@ -1,4 +1,4 @@
-<p>admin works!</p>
+<p>{{mainText}}</p>
 
 
 <div *ngIf="isRightRole">
@@ -14,21 +14,18 @@
   </form>
   <br>
   <h2>Filtered persons</h2>
-  <table class="table table-striped">
+  <table class="table">
     <thead>
     <tr>
-      <th>№</th>
       <th>ФИО</th>
       <th>Должность</th>
     </tr>
 
     </thead>
     <tbody>
-      <tr *ngFor="let personItem of filteredPersons | keyvalue">
-        <td> {{personItem.key}} </td>
-        <ng-container *ngFor="let person of personItem.value | keyvalue">
-          <td> {{person.value}} </td>
-        </ng-container>
+      <tr *ngFor="let employer of filteredPersons">
+        <td> {{employer.fio}} </td>
+        <td> {{employer.position}} </td>
       </tr>
     </tbody>
   </table>

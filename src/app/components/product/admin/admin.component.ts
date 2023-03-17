@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
 import {FilterRequestDto} from "../../models/filter-request-dto";
 import * as path from "path";
+import {Employer} from "../../models/employer";
 
 @Component({
   selector: 'app-admin',
@@ -19,11 +20,13 @@ export class AdminComponent implements OnInit {
   birthday: string = "";
   pol: string = "";
   isRightRole: boolean = false;
-  filteredPersons = [];
+  filteredPersons = new Array();
 
 
   constructor(private http: HttpClient) {
   }
+
+  mainText: string = "";
 
   ngOnInit(): void {
     this.http.get<any>(environment.backendURL + "/api/admin/page", {
@@ -35,10 +38,12 @@ export class AdminComponent implements OnInit {
       }
     }).subscribe({
       next: ((response: any) => {
+        this.mainText = "admin works!"
         console.log(response);
         this.isRightRole = true;
       }),
       error: ((error: any) => {
+        this.mainText = "you're not an admin. go out!"
         console.log(error);
       })
     })
@@ -65,7 +70,11 @@ export class AdminComponent implements OnInit {
       {
         next: ((response: any) => {
           console.log(response)
-          this.filteredPersons = response
+          for (let personItem of response) {
+            const employer = Object.assign(new Employer(), personItem);
+            this.filteredPersons.push(employer);
+          }
+          console.log(this.filteredPersons);
 
         }),
         error: (error => {
