@@ -24,7 +24,7 @@
     </div>
   </div>
 
-  <form method="post">
+  <form method="post" *ngIf="!isRoleChoosed">
     <div class="column is-10-tablet is-7-desktop is-6-widescreen is-5-fullhd">
 
       <div class="field">
@@ -54,7 +54,7 @@
     </div>
   </form>
 
-  <form method="post" *ngIf="choose_role">
+  <form method="post" *ngIf="isRoleChoosed">
     <div class="field">
       <select  name="category" [(ngModel)]="role">
         <option value="" *ngFor="let chosenRole of rolesToChoose"

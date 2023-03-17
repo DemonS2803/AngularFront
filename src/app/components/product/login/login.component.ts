@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   role: string = "";
   rolesToChoose: string[] = [];
   token: string = "";
-  choose_role: boolean = false;
+  isRoleChoosed: boolean = false;
 
   ngOnInit(): void {
 
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
             console.log(this.token);
           } else {
             console.log(response);
-            this.choose_role = true;
+            this.isRoleChoosed = true;
             this.token = response.user.token;
             localStorage.setItem("token", response.user.token)
             this.rolesToChoose = response.roles;
