@@ -5,9 +5,11 @@ import {HomeComponent} from "./components/product/home/home.component";
 import {AdminComponent} from "./components/product/admin/admin.component";
 import {TeacherComponent} from "./components/product/teacher/teacher.component";
 import {StudentComponent} from "./components/product/student/student.component";
+import {PersonalAccountComponent} from "./components/product/personal-account/personal-account.component";
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
+  {path: 'account', component: PersonalAccountComponent},
   {path: 'login', component: LoginComponent},
   {path: 'admin', component: AdminComponent},
   {path: 'teacher', component: TeacherComponent},

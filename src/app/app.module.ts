@@ -11,6 +11,7 @@ import { AdminComponent } from './components/product/admin/admin.component';
 import { StudentComponent } from './components/product/student/student.component';
 import { TeacherComponent } from './components/product/teacher/teacher.component';
 import {ErrorComponent} from "./components/product/error/error.component";
+import { PersonalAccountComponent } from './components/product/personal-account/personal-account.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {ErrorComponent} from "./components/product/error/error.component";
     AdminComponent,
     StudentComponent,
     TeacherComponent,
+    PersonalAccountComponent,
   ],
   imports: [
     BrowserModule,

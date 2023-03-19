@@ -46,6 +46,7 @@ export class LoginComponent implements OnInit {
           if (!response.needToChooseRole) {
             this.token = response.user.token;
             localStorage.setItem("token", response.user.token)
+            localStorage.setItem("currentRole", response.roles)
 
             console.log(this.token);
           } else {
@@ -53,6 +54,7 @@ export class LoginComponent implements OnInit {
             this.isRoleChoosed = true;
             this.token = response.user.token;
             localStorage.setItem("token", response.user.token)
+            localStorage.setItem("currentRole", "Not chosen")
             this.rolesToChoose = response.roles;
             console.log(this.rolesToChoose);
             console.log(response.token)
@@ -85,6 +87,7 @@ export class LoginComponent implements OnInit {
           console.log("success");
           this.token = response.token;
           localStorage.setItem("token", response.token)
+          localStorage.setItem("currentRole", response.role)
           this.router.navigate(["home"]);
         }),
         error: ((error: any) => {
